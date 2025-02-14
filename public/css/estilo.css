@@ -1,0 +1,101 @@
+:root{
+	--corPrincipal: #789b37;
+	--corHover: #638021;
+	--corPrincipalBrilho: #95bf32;
+}
+
+.btn-primary{
+	--bs-btn-color: #fff;
+    --bs-btn-bg: var(--corPrincipal) !important;
+    --bs-btn-border-color: var(--corPrincipal) !important;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--corHover) !important;
+    --bs-btn-hover-border-color: var(--corHover) !important;
+    --bs-btn-focus-shadow-rgb: var(--corPrincipalBrilho) !important;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: var(--corHover) !important;
+    --bs-btn-active-border-color: var(--corHover) !important;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: var(--corPrincipal) !important;
+    --bs-btn-disabled-border-color: var(--corPrincipal) !important;
+}
+
+footer .text-body-secondary{
+    --bs-text-opacity: 1;
+    color: white !important;
+}
+
+button,.btn, .btn-primary{
+	background-color: var(--corPrincipal);
+	border-color: var(--corPrincipal);
+}
+
+button,.btn:hover, .btn-primary:hover, .btn:focus, .btn-primary:focus, .btn:active, .btn-primary:active{
+	background-color: var(--corHover);
+	border-color: var(--corHover);
+}
+
+a,.nav-link{
+	color: var(--corPrincipal);
+}
+
+a:hover,.nav-link:hover{
+	color: var(--corPrincipalBrilho);
+}
+
+
+/* Garante que a página ocupe 100% da altura da tela */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Faz com que o conteúdo principal ocupe todo o espaço disponível */
+.container .mt-5{
+    flex: 1;
+    min-height: calc(100vh - 80px); /* Calcula a altura mínima da área de conteúdo, subtraindo a altura do footer */
+}
+
+/* Garante que o rodapé fique sempre no fim, sem margem extra */
+.footer {
+    background-color: var(--corPrincipal);
+    color: #fff;
+	min-width: 100%;
+    margin-top: auto;
+}
+
+/* Footer sem ultrapassar a largura */
+footer {
+    width: 100%;
+    max-width: 1280px; /* Isso vai garantir que o footer não ultrapasse o limite da .container */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    bottom: 0;
+}
+
+.mt-5{
+    height:100%;
+}
+
+@media (max-width: 870px) {
+    footer {
+        max-width: 100%;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+}
+
+/* Caso queira que o footer ocupe toda a largura em telas pequenas, remova o max-width */
+@media (max-width: 767px) {
+    footer {
+        max-width: 100%;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}

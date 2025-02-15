@@ -1,5 +1,5 @@
 # Sistema de Gerenciamento de Cadastro
-Este é um projeto de CRUD (create, read, update, delete) simples desenvolvido com o framework Laravel, jQuery e HTML5.<br>Mini aplicação para o cadastro de usuários, albuns, faixas (músicas).<br>
+Este é um projeto de CRUD (create, read, update, delete) simples desenvolvido com o framework Laravel, jQuery e HTML5.<br>Mini aplicação para o cadastro de usuários, álbuns e faixas (músicas).<br>
 
 ## Requisitos
 

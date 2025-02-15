@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/css/estilo.css">
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  <!-- Link do jQuery 3.6.4 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
 </head>
 <body>
   <div class="container mt-5">
@@ -29,18 +32,19 @@
       <div class="tab-pane fade show active" id="usuarios">
         <h2>Usuários</h2>
         <!-- Formulário de Cadastro de Usuário -->
-        <form id="formUsuario" class="mb-3">
+        <form id="formUsuario" class="mb-3" method="POST" action="{{ route('usuarios.store') }}">
+          @csrf
           <div class="mb-3">
             <label for="nomeUsuario" class="form-label">Nome:</label>
-            <input type="text" class="form-control" id="nomeUsuario" required>
+            <input type="text" class="form-control" id="nomeUsuario" name="nomeUsuario" required>
           </div>
           <div class="mb-3">
             <label for="dataNascimentoUsuario" class="form-label">Data de Nascimento:</label>
-            <input type="date" class="form-control" id="dataNascimentoUsuario" required>
+            <input type="date" class="form-control" id="dataNascimentoUsuario" name="dataNascimentoUsuario" required>
           </div>
           <div class="mb-3">
             <label for="sexoUsuario" class="form-label">Sexo:</label>
-            <select class="form-control" id="sexoUsuario" required>
+            <select class="form-control" id="sexoUsuario" name="sexoUsuario" required>
               <option value="Masculino">Masculino</option>
               <option value="Feminino">Feminino</option>
               <option value="Outro">Outro</option>
@@ -48,11 +52,11 @@
           </div>
           <div class="mb-3">
             <label for="usuarioUsuario" class="form-label">Usuário:</label>
-            <input type="text" class="form-control" id="usuarioUsuario" required>
+            <input type="text" class="form-control" id="usuarioUsuario" name="usuarioUsuario" required>
           </div>
           <div class="mb-3">
             <label for="senhaUsuario" class="form-label">Senha:</label>
-            <input type="password" class="form-control" id="senhaUsuario" required>
+            <input type="password" class="form-control" id="senhaUsuario" name="senhaUsuario" required>
           </div>
           <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
@@ -90,18 +94,19 @@
           <div class="tab-pane fade" id="albuns">
             <h2>Álbuns</h2>
             <!-- Formulário de Cadastro de Álbum -->
-            <form id="formAlbum" class="mb-3">
+            <form id="formAlbum" class="mb-3" method="POST" action="{{ route('albuns.store') }}">
+              @csrf
               <div class="mb-3">
                 <label for="nomeAlbum" class="form-label">Nome:</label>
-                <input type="text" class="form-control" id="nomeAlbum" required>
+                <input type="text" class="form-control" id="nomeAlbum" name="nomeAlbum" required>
               </div>
               <div class="mb-3">
-                <label for="anoLancamento" class="form-label">Ano de Lançamento:</label>
-                <input type="number" class="form-control" id="anoLancamento" required>
+                <label for="ano_lancamento" class="form-label">Ano de Lançamento:</label>
+                <input type="number" class="form-control" id="ano_lancamento" name="ano_lancamento" required>
               </div>
               <div class="mb-3">
                 <label for="artistaAlbum" class="form-label">Artista:</label>
-                <input type="text" class="form-control" id="artistaAlbum" required>
+                <input type="text" class="form-control" id="artistaAlbum" name="artistaAlbum" required>
               </div>
               <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
@@ -127,10 +132,11 @@
           <div class="tab-pane fade" id="musicas">
             <h2>Músicas</h2>
             <!-- Formulário de Cadastro de Música -->
-            <form id="formMusica" class="mb-3">
+            <form id="formMusica" class="mb-3" method="POST" action="{{ route('musicas.store') }}">
+              @csrf
               <div class="mb-3">
                 <label for="nomeMusica" class="form-label">Nome:</label>
-                <input type="text" class="form-control" id="nomeMusica" required>
+                <input type="text" class="form-control" id="nomeMusica" name="nomeMusica" required>
               </div>
               <div class="mb-3">
                 <label for="duracaoMusica" class="form-label">Duração (em segundos):</label>
@@ -138,8 +144,14 @@
               </div>
               <div class="mb-3">
                 <label for="albumMusica" class="form-label">Álbum:</label>
-                <select class="form-control" id="albumMusica">
-                  <!-- Populado dinamicamente -->
+                <select class="form-control" id="albumMusica" name="albumMusica" required>
+                  @if(isset($albums) && count($albums) > 0)
+                      @foreach($albums as $album)
+                          <option value="{{ $album->id }}">{{ $album->name }}</option>
+                      @endforeach
+                  @else
+                      <option value="">Nenhum álbum encontrado</option>
+                  @endif
                 </select>
               </div>
               <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -176,7 +188,7 @@
             <li class="ms-3"><a class="text-body-secondary" href="https://www.linkedin.com/in/allison-dos-santos-felix-743814a2/" target="_blank"><i class="bi bi-linkedin"></i></a></li>
           </ul>
         </footer>
-  </div>
+      </div>
 
   <!-- Bootstrap e Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

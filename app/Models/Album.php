@@ -10,7 +10,7 @@ class Album extends Model
     use HasFactory;
 
     // Definir a tabela associada (opcional)
-    protected $table = 'albums';
+    protected $table = 'albuns';
 
     // Colunas que podem ser preenchidas em massa
     protected $fillable = ['nome', 'ano', 'artista'];

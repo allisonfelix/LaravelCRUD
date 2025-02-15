@@ -29,26 +29,30 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
         // Validação dos dados recebidos
         $request->validate([
-            'nome' => 'required|string|max:255',
-            'data_nascimento' => 'required|date',
-            'sexo' => 'required|string',
-            'usuario' => 'required|string|unique:users,usuario|max:255',
-            'senha' => 'required|string|min:6',
+            'nomeUsuario' => 'required|string|max:255',
+            'dataNascimentoUsuario' => 'required|date',
+            'sexoUsuario' => 'required|string',
+            'usuarioUsuario' => 'required|string|unique:usuarios,usuario|max:255',
+            'senhaUsuario' => 'required|string|min:6',
         ]);
 
         // Cria o usuário
-        $user = User::create([
-            'nome' => $request->nome,
-            'data_nascimento' => $request->data_nascimento,
-            'sexo' => $request->sexo,
-            'usuario' => $request->usuario,
-            'senha' => bcrypt($request->senha), // Criptografa a senha
-        ]);
+        $user = new User();
+        $user->nome = $request->input('nomeUsuario');
+        $user->data_nascimento = $request->input('dataNascimentoUsuario');
+        $user->sexo = $request->input('sexoUsuario');
+        $user->usuario = $request->input('usuarioUsuario');
 
-        return response()->json(['message' => 'Usuário cadastrado com sucesso!', 'user' => $user], 201);
+        $user->senha = bcrypt($request->input('senhaUsuario')); // Criptografa a senha
+
+        $user->save();
+
+        dd($user);
+
+        //return response()->json(['message' => 'Usuário cadastrado com sucesso!', 'user' => $user], 201);
     }
 
     /**
@@ -81,7 +85,7 @@ class UserController extends Controller
             'nome' => 'required|string|max:255',
             'data_nascimento' => 'required|date',
             'sexo' => 'required|string',
-            'usuario' => 'required|string|max:255|unique:users,usuario,' . $user->id,
+            'usuario' => 'required|string|max:255|unique:usuarios,usuario,' . $user->id,
             'senha' => 'nullable|string|min:6',
         ]);
 

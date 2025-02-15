@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Models\Album;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,13 +12,18 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'users';
+    protected $table = 'usuarios';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
     protected $fillable = [
         'nome',
         'data_nascimento',

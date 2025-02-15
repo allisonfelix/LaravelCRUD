@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Song;
+use App\Models\Album;
 
 class SongController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        //
+        $songs = Song::all();  // Buscar todas as músicas
+        $albums = Album::all(); // Buscar todos os álbuns
+
+        return view('songs.index', compact('songs', 'albums')); 
     }
+
 
     /**
      * Show the form for creating a new resource.

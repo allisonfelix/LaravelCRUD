@@ -13,11 +13,16 @@ class Album extends Model
     protected $table = 'albuns';
 
     // Colunas que podem ser preenchidas em massa
-    protected $fillable = ['nome', 'ano', 'artista'];
+    protected $fillable = ['nome', 'ano', 'artista', 'user_id'];
 
     // Definir a relação com o modelo Song (um álbum tem muitas músicas)
     public function songs()
     {
         return $this->hasMany(Song::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class);
     }
 }

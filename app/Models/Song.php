@@ -10,7 +10,7 @@ class Song extends Model
     use HasFactory;
 
     // Definir a tabela associada
-    protected $table = 'songs';
+    protected $table = 'musicas';
 
     // Colunas que podem ser preenchidas em massa
     protected $fillable = ['nome', 'duracao', 'album_id', 'ordem'];
@@ -19,5 +19,10 @@ class Song extends Model
     public function album()
     {
         return $this->belongsTo(Album::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class);
     }
 }

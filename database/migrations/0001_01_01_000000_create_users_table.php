@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('sexo', ['Masculino', 'Feminino']);
             $table->string('usuario')->unique();
             $table->string('senha');
+            $table->boolean('is_admin')->default(false);
             $table->timestamps(); // Cria colunas para created_at e updated_at
         });
     }

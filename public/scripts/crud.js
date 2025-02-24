@@ -2,43 +2,47 @@ const d = new Date();
 let year = d.getFullYear();
 document.getElementById("ano").innerHTML = year;
 
-document.getElementById('formMusica').addEventListener('submit', function (event) {
-    event.preventDefault();
+$(document).ready(function() {
+    const themeSwitch = $('#themeSwitch');
+    const html = $('html');
 
-    const formData = new FormData(this);
+    // Verificar tema salvo no localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.attr('data-bs-theme', savedTheme);
+    themeSwitch.prop('checked', savedTheme === 'light');
 
-    fetch('/songs', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => alert('Música cadastrada!'))
-        .catch(error => alert('Erro ao cadastrar música.'));
+    // Evento de clique no switch
+    themeSwitch.on('change', function() {
+        const isDark = $(this).prop('checked');
+        const newTheme = isDark ? 'light' : 'dark';
+
+    html.attr('data-bs-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    });
+
+    // Opcional: Detectar preferência do sistema
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    if(!localStorage.getItem('theme')) {
+        html.attr('data-bs-theme', darkModeMediaQuery.matches ? 'light' : 'dark');
+    themeSwitch.prop('checked', darkModeMediaQuery.matches);
+    }
 });
 
 $(document).ready(function () {
-    $("#formUsuario").submit(function (e) {
-        e.preventDefault();
+    var options = {
+        placeholder: '00:00',
+        translation: {
+            2: { pattern: /[0-5]/ },  // Para o primeiro dígito dos minutos (0-5)
+            3: { pattern: /[0-9]/ },  // Para o segundo dígito dos minutos (0-9)
+            5: { pattern: /[0-5]/ },  // Para o primeiro dígito dos segundos (0-5)
+            6: { pattern: /[0-9]/ },  // Para o segundo dígito dos segundos (0-9)
+        },
+        onKeyPress: function (cep, e, field, options) {
+            var mask = '59:59';  // A máscara vai até 59 minutos e 59 segundos
+            field.mask(mask, options);
+        }
+    };
 
-        var formData = {
-            nome: $("#nomeUsuario").val(),
-            data_nascimento: $("#dataNascimentoUsuario").val(),
-            sexo: $("#sexoUsuario").val(),
-            usuario: $("#usuarioUsuario").val(),
-            senha: $("#senhaUsuario").val(),
-        };
-
-        $.ajax({
-            url: '/api/usuarios', // O endpoint do seu controlador (ajuste conforme necessário)
-            type: 'POST',
-            data: formData,
-            success: function (response) {
-                alert(response.message);
-                // Adicionar o usuário na tabela ou fazer outra ação
-            },
-            error: function (error) {
-                alert("Ocorreu um erro!");
-            }
-        });
-    });
+    $('#duracaoMusica').mask('59:59', options);  // Máscara para minutos:segundos
+    $('#musica_duracao_editar').mask('59:59', options);  // Máscara para minutos:segundos
 });

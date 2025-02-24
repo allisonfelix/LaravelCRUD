@@ -35,42 +35,57 @@ button,.btn:hover, .btn-primary:hover, .btn:focus, .btn-primary:focus, .btn:acti
 	border-color: var(--corHover);
 }
 
-a {
-    text-decoration: none;
-}
-
-a,.nav-link, .dashboardAction{
+a,.nav-link{
 	color: var(--corPrincipal);
 }
 
-    a:hover, .nav-link:hover, .dashboardAction:hover{
-        color: var(--corPrincipalBrilho);
-    }
-
-h4 {
-    color: var(--corPrincipal);
+a:hover,.nav-link:hover{
+	color: var(--corPrincipalBrilho);
 }
 
-#tabelaUsuarios, #tabelaAlbuns, #tabelaMusicas {
-    margin-bottom: 5em;
-    max-width: 100%;
+.login-container {
+    margin-top: 5em;
 }
+
 
 /* Garante que a página ocupe 100% da altura da tela */
 html, body {
-    min-height: 100%;
-    height:150%;
+    height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    
 }
 
 /* Faz com que o conteúdo principal ocupe todo o espaço disponível */
-.container .mt-5{
-    min-height: calc(100vh - 80px); /* Calcula a altura mínima da área de conteúdo, subtraindo a altura do footer */
-    margin-bottom:3em;
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Garante que o rodapé fique sempre no fim, sem margem extra */
+.footer {
+    background-color: var(--corPrincipal);
+    color: #fff;
+    width: 100%;
+    margin-top: auto;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.titulo-login{
+    padding-bottom: 3rem;
+}
+
+.tab-content {
+    flex: 1;
+    overflow: auto; /* Para evitar que o rodapé seja empurrado */
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--corHover);
+  border-width: 0;
 }
 
 /* Garante que o rodapé fique sempre no fim, sem margem extra */
@@ -79,9 +94,9 @@ html, body {
     color: #fff;
     min-width: 100%;
     width: calc(100vw);
-    margin-top: calc(100vh * 0.3);
+    margin-top: calc(30vh * 0.3);
     position: absolute;
-    bottom: calc(-100vh * 0.8);
+    bottom: calc(-30vh * 0.8);
     z-index: -1;
     padding: 0;
 }
@@ -96,14 +111,6 @@ footer {
     padding-right: 0;
 }
 
-.mt-5{
-    height:100%;
-}
-
-.table-responsive {
-    margin-top: 4em;
-}
-
 .footer .nav {
     justify-content: center;
 }
@@ -112,6 +119,9 @@ footer {
     margin: 0 5px;
 }
 
+.mt-5 {
+    height: 100%;
+}
 
 @media (max-width: 870px) {
     footer {
@@ -121,9 +131,9 @@ footer {
     }
 
     .footer {
-        margin-top: calc(100vh * 0.6);
+        margin-top: calc(30vh);
         position: absolute;
-        bottom: calc(-100vh);
+        bottom: calc(-30vh * 1.7);
     }
 
     .table-responsive {
@@ -140,15 +150,16 @@ footer {
     }
 
     .footer {
-        margin-top: calc(100vh * 0.5);
+        margin-top: calc(30vh);
         position: absolute;
-        bottom: calc(-100vh * 2);
+        bottom: calc(-30vh * 1.7);
     }
 
     .table-responsive {
         font-size: calc(100vw * 0.03);
     }
-    td, th{
-        padding:.3em;
+
+    td, th {
+        padding: .3em;
     }
 }

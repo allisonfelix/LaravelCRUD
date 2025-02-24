@@ -1,0 +1,59 @@
+:root {
+    --corPrincipal: #789b37;
+    --corHover: #638021;
+    --corPrincipalBrilho: #95bf32;
+}
+
+.height {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    min-width: 100%;
+}
+
+.search {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+}
+
+.search input {
+    height: 3em;
+    text-indent: 25px;
+    border: 2px solid rgba(150, 150, 150, .1);
+}
+
+
+.search input:focus {
+    box-shadow: none;
+    border: 1px solid rgba(150, 150, 150, 1);
+}
+
+.search .fa-search {
+    position: absolute;
+    top: 20px;
+    left: 16px;
+}
+
+.search button {
+    position: absolute;
+    top: .25em;
+    right: .25em;
+    height: 2.5em;
+    width: 6em;
+}
+
+.dropdown-item.active, .dropdown-item:active{
+    background-color: var(--corPrincipal);
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: var(--corPrincipalBrilho);
+}
+
+.dropdown-item > input{
+    background-color:none;
+}
+
+.btn-sm {
+    margin: 0.15em;
+    margin-right: 0;
+}

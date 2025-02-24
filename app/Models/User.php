@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-use App\Models\Album;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,17 +11,12 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'usuarios';
+    protected $table = 'usuarios'; // Nome da tabela no banco
+    protected $username = 'usuario'; // Campo de autenticação
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    public function albums()
-    {
-        return $this->hasMany(Album::class);
-    }
+    protected $casts = [
+        'is_admin' => 'boolean', // Faz com que 0 seja false e 1 seja true
+    ];
 
     protected $fillable = [
         'nome',
@@ -32,41 +26,33 @@ class User extends Authenticatable
         'senha'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
-        'senha', // Mudado de 'password' para 'senha'
+        'senha',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed', // Isso não é necessário porque 'senha' é o campo usado
-        ];
+    // Hash automático da senha
+    public function setSenhaAttribute($value) {
+        $this->attributes['senha'] = Hash::make($value);
     }
 
-    /**
-     * Hash the password before saving it to the database.
-     */
-    public static function boot()
-    {
-        parent::boot();
+    // Sobrescreva para autenticação via 'usuario'
+    public function findForPassport($username) {
+        return $this->where('usuario', $username)->first();
+    }
 
-        static::creating(function ($user) {
-            // Verifica se a senha está definida, se não, a define e faz o hash
-            if ($user->senha) {
-                $user->senha = Hash::make($user->senha);
-            }
-        });
+    // Sobrescreva para usar 'senha' como campo de senha
+    public function getAuthPassword() {
+        return $this->senha;
+    }
+
+    // Verifica se é admin
+    public function isAdmin() {
+        return $this->is_admin; // Certifique-se de que a coluna 'is_admin' existe
+    }
+
+    // Relacionamento com álbuns (se necessário)
+    public function albums() {
+        return $this->hasMany(Album::class);
     }
 }

@@ -1,5 +1,5 @@
 # Sistema de Gerenciamento de Cadastro
-Este é um projeto de CRUD (create, read, update, delete) simples desenvolvido com o framework Laravel, jQuery e HTML5.<br>Mini aplicação para o cadastro de usuários, álbuns e faixas (músicas).<br>
+Este é um projeto de CRUD (create, read, update, delete) simples desenvolvido com o framework Laravel, jQuery, Bootstrap, HTML5 e MySQL.<br>Mini aplicação para o cadastro de usuários, álbuns e faixas (músicas).<br>
 
 ## Requisitos
 
@@ -27,10 +27,19 @@ composer install
 3. Crie o arquivo `.env`
 
 Copie o arquivo `.env.example` para um novo arquivo `.env`:
+<br>
+- No Windows:
+```bash
+copy .env.example .env
+```
 
+<br>
+
+- No Linux/Mac:
 ```bash
 cp .env.example .env
 ```
+<br>
 
 4. Gere a chave de aplicativo do Laravel<br>
 O Laravel requer uma chave de aplicativo única, que pode ser gerada com o comando:
@@ -111,7 +120,7 @@ Copie o valor gerado.
 <br>
 
 #### 3. Crie um usuário normal (não administrador) pela interface ou inserindo manualmente.
-#### 4. Acesse seu banco de dados e atualize o registro do usuário para definir "is_admin" como 1 e, se necessário, substitua a senha pelo hash gerado:
+#### 4. Acesse seu banco de dados e atualize o registro do usuário para definir "is_admin" como 1 (se estiver usando MySQL, onde o boolean é um tinyint) ou para "true", dependendo do seu banco de dados e, se necessário, substitua a senha pelo hash gerado:
 ```sql
 UPDATE usuarios 
 SET senha = '<hash_gerado>', is_admin = 1 
